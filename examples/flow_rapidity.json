@@ -1,0 +1,175 @@
+{
+  "input": "/path/to/Afterburner",
+  "output": "results_{run_pattern}_flow/",
+  "run_pattern": "3.9_clasicAuAutf0p5_eth0p5_ec0p25*",
+  "workers": 1,
+  "group_by": [],
+  "sampling": {
+    "mode": "event"
+  },
+  "observables": {
+    "v2_rp_y_identified": {
+      "enabled": true,
+      "kind": "vn",
+      "harmonic": 2,
+      "pdg": [
+        211,
+        -211,
+        321,
+        -321,
+        2212,
+        -2212
+      ],
+      "axis": "y",
+      "y_range": [
+        -1.0,
+        1.0
+      ],
+      "eta_range": [
+        -1.0,
+        1.0
+      ],
+      "pt_range": [
+        0.2,
+        1.6
+      ],
+      "boundary": "open",
+      "y_bins": {
+        "min": -1.0,
+        "max": 1.0,
+        "count": 10
+      },
+      "flow": {
+        "method": "reaction_plane",
+        "angle": 0.0,
+        "weighting": "event"
+      }
+    },
+    "v2_ep_y_identified": {
+      "enabled": true,
+      "kind": "vn",
+      "harmonic": 2,
+      "pdg": [
+        211,
+        -211,
+        321,
+        -321,
+        2212,
+        -2212
+      ],
+      "charged": true,
+      "axis": "y",
+      "y_range": [
+        -1.0,
+        1.0
+      ],
+      "pt_range": [
+        0.2,
+        1.6
+      ],
+      "boundary": "open",
+      "y_bins": {
+        "min": -1.0,
+        "max": 1.0,
+        "count": 10
+      },
+      "flow": {
+        "method": "event_plane",
+        "weighting": "event",
+        "empty_bins": "zero",
+        "subevents": "alternating",
+        "reference": {
+          "eta": [
+            -1.0,
+            1.0
+          ],
+          "pt": [
+            0.2,
+            1.6
+          ],
+          "boundary": "open"
+        }
+      }
+    },
+    "v2_ep_y": {
+      "enabled": true,
+      "kind": "vn",
+      "harmonic": 2,
+      "pdg": [
+        "all_charged"
+      ],
+      "axis": "y",
+      "y_range": [
+        -1.0,
+        1.0
+      ],
+      "pt_range": [
+        0.2,
+        2.0
+      ],
+      "boundary": "open",
+      "y_bins": {
+        "min": -1.0,
+        "max": 1.0,
+        "count": 10
+      },
+      "flow": {
+        "method": "event_plane",
+        "weighting": "event",
+        "empty_bins": "zero",
+        "subevents": "alternating",
+        "reference": {
+          "eta": [
+            -1.0,
+            1.0
+          ],
+          "pt": [
+            0.2,
+            2.0
+          ],
+          "boundary": "open"
+        }
+      }
+    },
+    "v2_ep_eta": {
+      "enabled": true,
+      "kind": "vn",
+      "harmonic": 2,
+      "pdg": [
+        "all_charged"
+      ],
+      "axis": "eta",
+      "eta_range": [
+        -2.0,
+        2.0
+      ],
+      "pt_range": [
+        0.2,
+        2.0
+      ],
+      "boundary": "open",
+      "eta_bins": {
+        "min": -2.0,
+        "max": 2.0,
+        "count": 25
+      },
+      "flow": {
+        "method": "event_plane",
+        "weighting": "event",
+        "empty_bins": "zero",
+        "subevents": "alternating",
+        "reference": {
+          "eta": [
+            -2.0,
+            2.0
+          ],
+          "pt": [
+            0.2,
+            2.0
+          ],
+          "boundary": "open"
+        }
+      }
+    }
+  }
+}

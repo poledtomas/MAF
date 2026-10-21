@@ -1,0 +1,144 @@
+{
+  "group_by": [
+    "energy",
+    "collision_system",
+    "parameters.tf",
+    "parameters.eth",
+    "parameters.ec"
+  ],
+  "reader": {
+    "errors": "warn",
+    "shell_rtol": 0.0005,
+    "shell_atol": 1e-06
+  },
+  "parsing_rules": [
+    {
+      "pattern": "tf(?P<tf>[0-9]+p[0-9]+)_eth(?P<eth>[0-9]+p[0-9]+)_ec(?P<ec>[0-9]+p[0-9]+)",
+      "fields": {
+        "tf": {
+          "key": "parameters.tf",
+          "type": "float",
+          "unit": "fm/c"
+        },
+        "eth": {
+          "key": "parameters.eth",
+          "type": "float"
+        },
+        "ec": {
+          "key": "parameters.ec",
+          "type": "float",
+          "unit": "GeV/fm^3"
+        }
+      }
+    }
+  ],
+  "observables": [
+    {
+      "name": "proton_dndy",
+      "kind": "dndy",
+      "bins": [
+        -2.0,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        2.0
+      ],
+      "selection": {
+        "pdg": [
+          2212
+        ]
+      }
+    },
+    {
+      "name": "charged_dndeta",
+      "kind": "dndeta",
+      "bins": [
+        -2.0,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "name": "net_proton_dndy",
+      "kind": "net_proton",
+      "bins": [
+        -2.0,
+        -1.0,
+        0.0,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "name": "pion_invariant_pt",
+      "kind": "invariant_pt",
+      "bins": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        1.0,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "selection": {
+        "pdg": [
+          -211
+        ],
+        "y": [
+          -0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "proton_midrapidity_yield",
+      "kind": "yield",
+      "selection": {
+        "pdg": [
+          2212
+        ],
+        "y": [
+          -0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "proton_mean_pt",
+      "kind": "mean_pt",
+      "selection": {
+        "pdg": [
+          2212
+        ],
+        "y": [
+          -0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "kaon_pion_ratio",
+      "kind": "ratio",
+      "denominator_pdg": [
+        -211
+      ],
+      "selection": {
+        "pdg": [
+          -321
+        ],
+        "y": [
+          -0.5,
+          0.5
+        ]
+      }
+    }
+  ]
+}

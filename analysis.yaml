@@ -1,0 +1,211 @@
+# Change input to your simulation directory. Relative paths are relative to this file.
+input: /storage/brno12-cerit/home/poledto1/smash-vhlle-hybrid/data/Afterburner
+output: "results_{run_pattern}/"
+workers: 1
+
+# All matching files belong to the same event-by-event simulation ensemble.
+run_pattern: "7.7_AuAU_run_1"
+# Sum contributions across every selected file and normalize the combined result.
+group_by: []
+
+# Independent simulation events are the statistical units, including across files.
+sampling:
+  mode: event
+
+reader:
+  errors: warn
+
+# Matplotlib settings used by: python main.py plot --all --config analysis.yaml
+plot:
+  rc_params:
+    figure.figsize: [7.0, 5.5]
+    font.size: 12
+    axes.labelsize: 13
+    axes.titlesize: 11
+    legend.fontsize: 9
+    xtick.labelsize: 12
+    ytick.labelsize: 12
+    axes.grid: false
+    grid.alpha: 0.3
+    grid.linestyle: "--"
+    lines.markersize: 7
+    errorbar.capsize: 3
+    figure.dpi: 150
+
+# pdg: [all_charged] selects all charged species together (also in flow.reference).
+# Without pdg, all species including neutral particles are selected.
+observables:
+  pt_spectra:
+    enabled: true
+    pdg: [211, -211, 2212, 321, -321]
+    # spectrum.c convention: |y|<0.1, 36 bins in 0.2<pT<2 GeV.
+    y_range: [-0.1, 0.1]
+    pt_range: [0.2, 2.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 2.0, count: 36}
+    invariant: true
+
+  dndy:
+    enabled: true
+    pdg: [211, -211, 2212, -2212, 321, -321]
+    y_bins:  {min: -5, max: 5, count: 50}
+
+  net_proton:
+    enabled: true
+    name: net_proton_dndy
+    # analyza.py: np.linspace(-5, 5, 50) means 50 edges / 49 bins.
+    y_bins: {min: -5, max: 5, count: 49}
+
+  dndeta:
+    enabled: true
+    eta_range: [-5, 5]
+    eta_bins: {min: -5, max: 5, count: 50}
+    boundary: open
+
+  yields:
+    enabled: false
+    pdg: [211, -211, 321, -321, 2212, -2212]
+    y_range: [-0.5, 0.5]
+
+  mean_pt:
+    enabled: false
+    pdg: [211, -211, 2212]
+    y_range: [-0.5, 0.5]
+
+  v1:
+    enabled: true
+    pdg: [2212]
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: reaction_plane
+      weighting: event
+      # Use zero only for events aligned with a known reaction plane at zero radians.
+      angle: 0.0
+
+  v2:
+    enabled: true
+    pdg: [211, -211, 2212]
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: reaction_plane
+      weighting: event
+      angle: 0.0
+
+  v2_cumulant2:
+    kind: v2
+    enabled: true
+    name: v2_cumulant2
+    pdg: [all_charged]
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 2.0]
+    pt_bins: {min: 0.2, max: 2.0, count: 18}
+    flow:
+      method: cumulant_2
+      weighting: tuple
+      reference:
+        pdg: [211, -211]
+        eta: [-0.8, 0.8]
+        pt: [0.2, 3.0]
+
+  # Rapidity-flow configurations; see docs/flow.md.
+  # Change harmonic and the block name together for another order.
+  v2_rp_y_identified:
+    enabled: false
+    kind: vn
+    harmonic: 2
+    pdg: [211, -211, 321, -321, 2212, -2212]
+    axis: y
+    y_range: [-1.0, 1.0]
+    eta_range: [-1.0, 1.0]
+    pt_range: [0.2, 1.6]
+    boundary: open
+    y_bins: {min: -1.0, max: 1.0, count: 10}
+    flow:
+      method: reaction_plane
+      angle: 0.0  # Known plane, in radians; only for aligned events.
+      weighting: event
+
+  v2_ep_y_identified:
+    enabled: false
+    kind: vn
+    harmonic: 2
+    pdg: [211, -211, 321, -321, 2212, -2212]
+    charged: true
+    axis: y
+    y_range: [-1.0, 1.0]
+    pt_range: [0.2, 1.6]
+    boundary: open
+    y_bins: {min: -1.0, max: 1.0, count: 10}
+    flow:
+      method: event_plane
+      weighting: event
+      empty_bins: zero
+      subevents: alternating
+      # This reference includes neutral particles; add pdg: [all_charged] to restrict it.
+      reference:
+        eta: [-1.0, 1.0]
+        pt: [0.2, 1.6]
+        boundary: open
+
+  v2_ep_y:
+    enabled: false
+    kind: vn
+    harmonic: 2
+    pdg: [all_charged]
+    axis: y
+    y_range: [-1.0, 1.0]
+    pt_range: [0.2, 2.0]
+    boundary: open
+    y_bins: {min: -1.0, max: 1.0, count: 10}
+    flow:
+      method: event_plane
+      weighting: event
+      empty_bins: zero
+      subevents: alternating
+      reference:
+        eta: [-1.0, 1.0]
+        pt: [0.2, 2.0]
+        boundary: open
+
+  v2_ep_eta:
+    enabled: false
+    kind: vn
+    harmonic: 2
+    pdg: [all_charged]
+    axis: eta
+    eta_range: [-2.0, 2.0]
+    pt_range: [0.2, 2.0]
+    boundary: open
+    eta_bins: {min: -2.0, max: 2.0, count: 25}
+    flow:
+      method: event_plane
+      weighting: event
+      empty_bins: zero
+      subevents: alternating
+      reference:
+        eta: [-2.0, 2.0]
+        pt: [0.2, 2.0]
+        boundary: open
+    
+  v1_protons_y:
+    enabled: true
+    kind: v1
+    pdg: [2212]
+    axis: y
+    y_bins: {min: -1, max: 1, count: 10}
+    pt_range: [0.2, 1.6]
+    eta_range: [-1, 1]
+    boundary: open
+    flow:
+      method: reaction_plane
+      angle: 0.0
+      weighting: event

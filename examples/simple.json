@@ -1,0 +1,164 @@
+{
+  "input": "/path/to/simulation/runs",
+  "output": "results/",
+  "workers": 1,
+  "group_by": [],
+  "sampling": {
+    "mode": "event"
+  },
+  "reader": {
+    "errors": "warn"
+  },
+  "observables": {
+    "pt_spectra": {
+      "enabled": true,
+      "pdg": [
+        211,
+        -211,
+        2212,
+        321,
+        -321
+      ],
+      "y_range": [
+        -0.1,
+        0.1
+      ],
+      "pt_range": [
+        0.2,
+        2.0
+      ],
+      "boundary": "open",
+      "pt_bins": {
+        "min": 0.2,
+        "max": 2.0,
+        "count": 36
+      },
+      "invariant": true
+    },
+    "dndy": {
+      "enabled": true,
+      "pdg": [
+        211,
+        -211,
+        2212,
+        -2212,
+        321,
+        -321
+      ],
+      "y_bins": [
+        -2,
+        -1.5,
+        -1,
+        -0.5,
+        0,
+        0.5,
+        1,
+        1.5,
+        2
+      ]
+    },
+    "dndeta": {
+      "enabled": true,
+      "eta_range": [
+        -5,
+        5
+      ],
+      "eta_bins": {
+        "min": -5,
+        "max": 5,
+        "count": 50
+      },
+      "boundary": "open"
+    },
+    "yields": {
+      "enabled": false,
+      "pdg": [
+        211,
+        -211,
+        321,
+        -321,
+        2212,
+        -2212
+      ],
+      "y_range": [
+        -0.5,
+        0.5
+      ]
+    },
+    "mean_pt": {
+      "enabled": false,
+      "pdg": [
+        211,
+        -211,
+        2212
+      ],
+      "y_range": [
+        -0.5,
+        0.5
+      ]
+    },
+    "v1": {
+      "enabled": false,
+      "pdg": [
+        2212
+      ],
+      "axis": "pt",
+      "eta_range": [
+        -0.8,
+        0.8
+      ],
+      "pt_range": [
+        0.2,
+        3.0
+      ],
+      "boundary": "open",
+      "pt_bins": {
+        "min": 0.2,
+        "max": 3.0,
+        "count": 14
+      },
+      "flow": {
+        "method": "reaction_plane",
+        "weighting": "event",
+        "angle": 0.0
+      }
+    },
+    "v2": {
+      "enabled": false,
+      "pdg": [
+        211,
+        -211,
+        2212
+      ],
+      "axis": "pt",
+      "eta_range": [
+        -0.8,
+        0.8
+      ],
+      "pt_range": [
+        0.2,
+        3.0
+      ],
+      "boundary": "open",
+      "pt_bins": {
+        "min": 0.2,
+        "max": 3.0,
+        "count": 14
+      },
+      "flow": {
+        "method": "reaction_plane",
+        "weighting": "event",
+        "angle": 0.0
+      }
+    },
+    "net_proton": {
+      "enabled": true,
+      "name": "net_proton_dndy",
+      "y_bins": {
+        "min": -5,
+        "max": 5,
+        "count": 49
+      }
+    }
+  }
+}

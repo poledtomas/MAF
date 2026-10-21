@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "initial_condition": "USER_MUST_SET",
+    "centrality": {"type": "impact_parameter", "range": [0.0, 3.0], "unit": "fm"},
+    "sampling": {"mode": "run"}
+  },
+  "runs": {
+    "7.7AuAutf0p2_eth0p4_ec0p3339_run95_scratch": {
+      "seed": 12345,
+      "tags": ["example-only"],
+      "sampling": {
+        "mode": "hydro",
+        "namespace": "example-hydro-production",
+        "hydro_ids": {"0:0": "hydro-001", "0:1": "hydro-001", "1:0": "hydro-002"}
+      }
+    }
+  }
+}

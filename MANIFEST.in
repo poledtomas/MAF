@@ -1,0 +1,4 @@
+include analysis.yaml main.py README.md LICENSE CITATION.cff
+recursive-include docs *.md *.json
+recursive-include examples *.py *.json *.toml *.yaml
+recursive-include tests *.py

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this code in your research, please cite it as below."
+authors:
+  - family-names: Polednicek
+    given-names: Tomas
+    orcid: https://orcid.org/0009-0009-8471-3051
+title: "MAF"
+version: "0.5.0"
+license: MIT
+url: https://github.com/poledto1/MAF

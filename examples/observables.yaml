@@ -1,0 +1,85 @@
+# One ensemble of independent events across the selected input files.
+# Set input and restrict it to one physical simulation configuration.
+input: /path/to/simulation/runs
+output: results-observables/
+workers: 1
+group_by: []
+sampling:
+  mode: event
+
+observables:
+  pt_spectra:
+    enabled: true
+    pdg: [211, 321, 2212]
+    y_range: [-0.1, 0.1]
+    pt_range: [0.2, 2.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 2.0, count: 36}
+    invariant: true
+
+  dndeta:
+    enabled: true
+    eta_range: [-5, 5]
+    boundary: open
+    eta_bins: {min: -5, max: 5, count: 50}
+
+  v2_RP:
+    kind: v2
+    enabled: false
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: reaction_plane
+      weighting: event
+      angle: 0.0  # Valid only for a known reaction plane aligned at zero radians.
+
+  v2_EP:
+    kind: v2
+    enabled: false
+    axis: pt
+    charged: true
+    eta_range: [-1.0, 1.0]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: event_plane
+      weighting: event
+      subevents: alternating
+      reference:
+        eta: [-1.0, 1.0]
+        pt: [0.2, 3.0]
+        boundary: open
+
+  v2_C2:
+    kind: v2
+    enabled: false
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: cumulant_2
+      reference:
+        eta: [-0.8, 0.8]
+        pt: [0.2, 3.0]
+        boundary: open
+
+  v2_C4:
+    kind: v2
+    enabled: false
+    axis: pt
+    eta_range: [-0.8, 0.8]
+    pt_range: [0.2, 3.0]
+    boundary: open
+    pt_bins: {min: 0.2, max: 3.0, count: 14}
+    flow:
+      method: cumulant_4
+      reference:
+        eta: [-0.8, 0.8]
+        pt: [0.2, 3.0]
+        boundary: open

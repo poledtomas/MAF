@@ -1,0 +1,69 @@
+# Paths in manifest runs are relative to the simulation discovery root.
+# Model grouping keys are deliberately explicit. Missing keys isolate a run.
+group_by = ["energy", "collision_system", "parameters.tf", "parameters.eth", "parameters.ec"]
+
+[reader]
+errors = "warn"
+shell_rtol = 0.0005
+shell_atol = 0.000001
+
+[[parsing_rules]]
+pattern = 'tf(?P<tf>[0-9]+p[0-9]+)_eth(?P<eth>[0-9]+p[0-9]+)_ec(?P<ec>[0-9]+p[0-9]+)'
+[parsing_rules.fields.tf]
+key = "parameters.tf"
+type = "float"
+unit = "fm/c"
+[parsing_rules.fields.eth]
+key = "parameters.eth"
+type = "float"
+[parsing_rules.fields.ec]
+key = "parameters.ec"
+type = "float"
+unit = "GeV/fm^3"
+
+[[observables]]
+name = "proton_dndy"
+kind = "dndy"
+bins = [-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0]
+[observables.selection]
+pdg = [2212]
+
+[[observables]]
+name = "charged_dndeta"
+kind = "dndeta"
+bins = [-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0]
+
+[[observables]]
+name = "net_proton_dndy"
+kind = "net_proton"
+bins = [-2.0, -1.0, 0.0, 1.0, 2.0]
+
+[[observables]]
+name = "pion_invariant_pt"
+kind = "invariant_pt"
+bins = [0.0, 0.2, 0.4, 0.6, 1.0, 1.5, 2.0, 3.0]
+[observables.selection]
+pdg = [-211]
+y = [-0.5, 0.5]
+
+[[observables]]
+name = "proton_midrapidity_yield"
+kind = "yield"
+[observables.selection]
+pdg = [2212]
+y = [-0.5, 0.5]
+
+[[observables]]
+name = "proton_mean_pt"
+kind = "mean_pt"
+[observables.selection]
+pdg = [2212]
+y = [-0.5, 0.5]
+
+[[observables]]
+name = "kaon_pion_ratio"
+kind = "ratio"
+denominator_pdg = [-211]
+[observables.selection]
+pdg = [-321]
+y = [-0.5, 0.5]
