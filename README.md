@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="assets/logo.png" alt="MAF logo" width="240">
+  <img src="assets/logo.png" alt="MAF logo" width="340">
 </p>
 # MAF — Modular Analysis Framework
 
