@@ -1,7 +1,8 @@
 
 <p align="center">
-  <img src="assets/logo.png" alt="MAF logo" width="340">
+  <img src="assets/logo.png" alt="MAF logo" width="640">
 </p>
+
 # MAF — Modular Analysis Framework
 
 MAF computes observables from event-by-event SMASH–vHLLE simulations stored
