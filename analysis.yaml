@@ -1,10 +1,10 @@
 # Change input to your simulation directory. Relative paths are relative to this file.
-input: /storage/brno12-cerit/home/poledto1/smash-vhlle-hybrid/data/Afterburner
+input: path
 output: "results_{run_pattern}/"
 workers: 1
 
 # All matching files belong to the same event-by-event simulation ensemble.
-run_pattern: "7.7_AuAU_run_1"
+run_pattern: "dir"
 # Sum contributions across every selected file and normalize the combined result.
 group_by: []
 
